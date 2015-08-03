@@ -41,17 +41,17 @@ You'll also require a copy of the installation binaries, which are propietary an
 ### Beginning with oraclexe
 
 Just include in your node definition:
-
+```
 class oraclexe::install {
   url => 'http://server/oracle-xe-11.2.0-1.0.x86_64.rpm'	
 }
-
+```
 or
-
+```
 class oraclexe::install {
   path => '/tmp/oracle-xe-11.2.0-1.0.x86_64.rpm'
 }
-
+```
 ## Usage
 
 Note that there are a number of parameters available for the oracle::install class:
@@ -73,15 +73,15 @@ Note that there are a number of parameters available for the oracle::install cla
 ## Reference
 
 * Classes
-- oraclexe: Default class, calls an install with default values. Requires either a $url or a $path.
-- oraclexe::install: Installs the database package.
-- oraclexe::params: Declares the default values.
-- oraclexe::prereqs: Configures the kernel parameters and installs the package dependencies. 
+  - oraclexe: Default class, calls an install with default values. Requires either a $url or a $path.
+  - oraclexe::install: Installs the database package.
+  - oraclexe::params: Declares the default values.
+  - oraclexe::prereqs: Configures the kernel parameters and installs the package dependencies. 
 * Types
-- oraclexe::answerfile: Defined type, creates a file $name with the answer files template.
-- oraclexe::user: Custom type, creates a user in the database.
+  - oraclexe::answerfile: Defined type, creates a file $name with the answer files template.
+  - oraclexe::user: Custom type, creates a user in the database.
 
-oraclexe_user { 'SYSTEM':
+```oraclexe_user { 'SYSTEM':
   ensure             => 'present',
   account_status     => 'OPEN',
   default_tablespace => 'SYSTEM',
@@ -90,15 +90,16 @@ oraclexe_user { 'SYSTEM':
   profile            => 'DEFAULT',
   user_id            => '5',
 }
-
+```
 * Facts
-- oraclexe_home
-- oraclexe_lsnrpid
+  - oraclexe_home
+  - oraclexe_lsnrpid
 
 ## Limitations
 - The oraclexe::user type can't ensure passwords, due to the fact that there is no way (that I could find) to generate Oracle password hashes for comparison. The user_id, lock_date, and expiry_date are read only at the moment.
 - This module has only been tested on Centos 6, though it should work on Centos 7.
-
+- At this time the password for the system user in the type is statically set to the default, working on it....
+- In order for puppet resource user oraclexe_user to work you need to have the right environment variables set up. oraclexe::install handles that, but you might need to either source /etc/profile or re-login before you run it.
 ## Development
 
 I'm no Oracle DBA, whatever feedback is really appreciated, specially in the day to day tasks.

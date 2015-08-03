@@ -1,6 +1,6 @@
 {
   "name": "ncorrare-oraclexe",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "ncorrare",
   "summary": "A module to install and configure an Oracle XE database.",
   "license": "Apache-2.0",
