@@ -60,13 +60,16 @@ class oraclexe::install (
             ensure => present
           } ->
           file_line { 'oracleenv':
-            path => '/etc/profile',
-            line => 'source /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh'
+            path   => '/etc/profile',
+            line   => 'source /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh',
+            after  => Package['oracle-xe'],
+            notify => Exec['pegeminstall'],
           }
-          package { 'oci8':
-            ensure   => installed,
-            provider => 'gem',
-            require  => Package['oracle-xe'],
+          exec { 'pegeminstall':
+            environment => ['ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe'],
+            command     => '/opt/puppetlabs/puppet/bin/gem install ruby-oci8',
+            refreshonly => true,
+            require     => Exec['oraclexeconfig']
           }
       }
       else

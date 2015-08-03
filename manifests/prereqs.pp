@@ -17,7 +17,7 @@ class oraclexe::prereqs (
     validate_integer($shmmni)
     validate_integer($shmall)
     validate_integer($filemax)
-    $packagedeps = ['glibc','make','binutils','gcc','libaio','curl']
+    $packagedeps = ['glibc','make','binutils','gcc','libaio','curl','rubygems','ruby-devel']
     sysctl { 'kernel.sem':
       value => "$semmsl $semmns $semopm $semmni",
     }
