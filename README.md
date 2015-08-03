@@ -81,7 +81,8 @@ Note that there are a number of parameters available for the oracle::install cla
   - oraclexe::answerfile: Defined type, creates a file $name with the answer files template.
   - oraclexe::user: Custom type, creates a user in the database.
 
-```oraclexe_user { 'SYSTEM':
+```
+oraclexe_user { 'SYSTEM':
   ensure             => 'present',
   account_status     => 'OPEN',
   default_tablespace => 'SYSTEM',
