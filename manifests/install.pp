@@ -66,7 +66,7 @@ class oraclexe::install (
           }
           package { 'ruby-oci8':
             ensure   => installed,
-            provider => 'puppet-gem',
+            provider => 'puppet_gem',
             require  => Exec['oraclexeconfig']
           }
       }
