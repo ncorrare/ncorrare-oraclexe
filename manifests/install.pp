@@ -61,12 +61,12 @@ class oraclexe::install (
           } ->
           file_line { 'oracleenv':
             path   => '/etc/profile',
-            line   => '/u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh',
+            line   => 'source /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh',
             after  => Package['oracle-xe'],
           }
           exec { 'oracleenv':
             refreshonly => true,
-            command     => 'source /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh',
+            command     => '/u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh',
           }
           package { 'ruby-oci8':
             ensure   => installed,
