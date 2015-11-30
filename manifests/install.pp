@@ -63,7 +63,6 @@ class oraclexe::install (
             path   => '/etc/profile',
             line   => 'source /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh',
             after  => Package['oracle-xe'],
-            notify => Exec['pegeminstall'],
           }
           package { 'ruby-oci8':
             ensure   => installed,
