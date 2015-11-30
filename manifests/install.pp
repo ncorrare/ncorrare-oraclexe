@@ -35,7 +35,7 @@ class oraclexe::install (
           shmmax => $shmmax,
           shmmni => $shmmni,
           shmall => $shmall,
-  	  before => Package['oracle-xe']
+  	      before => Package['oracle-xe']
           }
         }
         if $url {
@@ -65,11 +65,10 @@ class oraclexe::install (
             after  => Package['oracle-xe'],
             notify => Exec['pegeminstall'],
           }
-          exec { 'pegeminstall':
-            environment => ['ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe'],
-            command     => '/opt/puppetlabs/puppet/bin/gem install ruby-oci8',
-            refreshonly => true,
-            require     => Exec['oraclexeconfig']
+          package { 'ruby-oci8':
+            ensure   => installed,
+            provider => 'puppet-gem',
+            require  => Exec['oraclexeconfig']
           }
       }
       else
