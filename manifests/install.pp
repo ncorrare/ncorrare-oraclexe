@@ -15,9 +15,9 @@ class oraclexe::install (
   String $path          = '/tmp/oracle.rpm',
   Optional $url         = undef,
 ) inherits oraclexe::params {
-  if Integer $::memorysize_mb > 256 {
+  if $facts['memorysize_mb'] > 256 {
     notify {'Validated minimal memory requirement': }
-      if Integer $::swapsize_mb > 980 {
+      if $facts['swapsize_mb'] > 980 {
         notify {'Validated minimum swap requirement': }
         oraclexe::answerfile { 'xe.rsp':
           oracle_listener_port  => $oracle_listener_port,
