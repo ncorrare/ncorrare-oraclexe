@@ -12,8 +12,8 @@ class oraclexe::install (
   $oracle_password      = $oraclexe::params::oracle_password,
   $oracle_dbenable      = $oraclexe::params::oracle_dbenable,
   $manageprereqs        = $oraclexe::params::manageprereqs,
-  $path                 = '/tmp/oracle.rpm',
-  $url                  = undef,
+  Optional $path                 = '/tmp/oracle.rpm',
+  Optional $url                  = undef,
 ) inherits oraclexe::params {
   if $memorysize_mb > 256 {
     notify {'Validated minimal memory requirement': }
