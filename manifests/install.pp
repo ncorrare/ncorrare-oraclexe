@@ -17,7 +17,7 @@ class oraclexe::install (
 ) inherits oraclexe::params {
   if $facts['memorysize_mb'] > 256 {
     notify {'Validated minimal memory requirement': }
-      if $facts['swapsize_mb'] > 980 {
+      if $facts['swapsize_mb'] > 980 or $facts['swapsize_mb'] == undef {
         notify {'Validated minimum swap requirement': }
         oraclexe::answerfile { 'xe.rsp':
           oracle_listener_port  => $oracle_listener_port,
