@@ -13,7 +13,7 @@ class oraclexe::install (
   $oracle_dbenable      = $oraclexe::params::oracle_dbenable,
   $manageprereqs        = $oraclexe::params::manageprereqs,
   $path                 = '/tmp/oracle.rpm',
-  $url,
+  $url                  = undef,
 ) inherits oraclexe::params {
   if $memorysize_mb > 256 {
     notify {'Validated minimal memory requirement': }
@@ -38,7 +38,7 @@ class oraclexe::install (
   	      before => Package['oracle-xe']
           }
         }
-        if $url {
+        if $url != undef {
           validate_re($url, '[\w:]+\.(rpm)', 'The URL provided is not valid')
           exec { 'retrieve':
             unless  => "/bin/rpm -q oracle-xe",
